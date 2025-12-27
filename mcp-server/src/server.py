@@ -155,7 +155,7 @@ def web_search(query: str) -> str:
 
         # DEBUG LOGGING
         if os.getenv("DEBUG") == "true":
-            print(f"\n--- 🕵️ DEBUG: SEARCH RESULTS FOR '{query}' ---")
+            print(f"\n--- DEBUG: SEARCH RESULTS FOR '{query}' ---")
             for i, res in enumerate(response.get('results', [])):
                 print(f"Result #{i+1}: {res['title']}")
                 print(f"URL: {res['url']}")

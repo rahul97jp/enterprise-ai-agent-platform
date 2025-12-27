@@ -47,31 +47,42 @@ Create a `.env` file in the root directory:
 GOOGLE_API_KEY=your_google_key
 TAVILY_API_KEY=your_tavily_key
 # Optional: DEBUG=true
+```
 
-### Installation
-* **Backend & MCP:**
+### 3. Installation
+**Backend & MCP:**
+```bash
 # Option A: Using uv (Recommended)
 uv sync
 # Option B: Using standard pip
 pip install -r requirements.txt
+```
 
-* **Frontend:**
+**Frontend:**
+```bash
 cd frontend
 npm install
+```
 
 ### Running the System
 * You need to run three separate processes in three terminal windows.
 
-* **Terminal 1: MCP Tool Server**
+**Terminal 1: MCP Tool Server**
+```bash
 uv run mcp-server/src/server.py
+```
 # Expected Output: Starting MCP Server via SSE...
 
-* **Terminal 2: Backend API**
+**Terminal 2: Backend API**
+```bash
 uv run backend/main.py
 # Expected Output: Uvicorn running on http://0.0.0.0:8001
+```
 
-* **Terminal 3: Frontend UI**
+**Terminal 3: Frontend UI**
+```bash
 cd frontend
 npm run dev
+```
 
 * **Open your browser to http://localhost:3000**
