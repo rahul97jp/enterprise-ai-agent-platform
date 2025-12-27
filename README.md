@@ -2,7 +2,7 @@
 
 An agentic platform designed to automate complex document analysis and research tasks. This system leverages **LangGraph** for state management and the **Model Context Protocol (MCP)** to modularize tool execution, enabling an LLM to read RFPs, perform live web research, and generate strategic PDF proposals.
 
-<img width="2000" height="1000" alt="image" src="https://github.com/user-attachments/assets/3c66bfb7-3526-4fe5-96a4-e930840f0d48" />
+<img width="1600" height="1000" alt="image" src="https://github.com/user-attachments/assets/3c66bfb7-3526-4fe5-96a4-e930840f0d48" />
 
 
 ## 🚀 Key Capabilities
