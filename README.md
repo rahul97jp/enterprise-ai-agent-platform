@@ -71,13 +71,13 @@ npm install
 ```bash
 uv run mcp-server/src/server.py
 ```
-# Expected Output: Starting MCP Server via SSE...
+Expected Output: Starting MCP Server via SSE...
 
 **Terminal 2: Backend API**
 ```bash
 uv run backend/main.py
-# Expected Output: Uvicorn running on http://0.0.0.0:8001
 ```
+Expected Output: Uvicorn running on http://0.0.0.0:8001
 
 **Terminal 3: Frontend UI**
 ```bash
