@@ -1,0 +1,32 @@
+# --- PYTHON & UV ---
+__pycache__/
+*.py[cod]
+.venv/
+.env
+.python-version
+uv.lock
+
+# --- NODE & NEXT.JS ---
+node_modules/
+.next/
+out/
+build/
+dist/
+.DS_Store
+
+# --- DATA & ARTIFACTS ---
+# Keep the folder, ignore the content (except gitkeep)
+mcp-server/data/*
+!mcp-server/data/.gitkeep
+backend/data/*
+!backend/data/.gitkeep
+
+# --- LOGS ---
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# --- IDEs ---
+.vscode/
+.idea/

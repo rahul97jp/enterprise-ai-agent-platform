@@ -1,0 +1,17 @@
+[project]
+name = "mcp-server"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "fastmcp>=2.14.1",
+    "markdown>=3.10",
+    "mcp[cli]>=0.1.0",
+    "pymupdf4llm>=0.2.7",
+    "python-dotenv>=1.2.1",
+    "python-multipart>=0.0.21",
+    "tavily-python>=0.7.17",
+    "uvicorn>=0.38.0",
+    "xhtml2pdf>=0.2.17",
+]
