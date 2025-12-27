@@ -64,7 +64,7 @@ cd frontend
 npm install
 ```
 
-### Running the System
+### 4. Running the System
 * You need to run three separate processes in three terminal windows.
 
 **Terminal 1: MCP Tool Server**
