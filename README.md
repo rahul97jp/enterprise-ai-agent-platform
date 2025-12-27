@@ -2,8 +2,8 @@
 
 An agentic platform designed to automate complex document analysis and research tasks. This system leverages **LangGraph** for state management and the **Model Context Protocol (MCP)** to modularize tool execution, enabling an LLM to read RFPs, perform live web research, and generate strategic PDF proposals.
 
-![Project Screenshot](https://via.placeholder.com/1200x600?text=Enterprise+AI+Assistant+Screenshot)
-*(Replace this link with your actual screenshot)*
+<img width="2980" height="1550" alt="image" src="https://github.com/user-attachments/assets/3c66bfb7-3526-4fe5-96a4-e930840f0d48" />
+
 
 ## 🚀 Key Capabilities
 
