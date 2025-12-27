@@ -66,12 +66,10 @@ SYSTEM_PROMPT = """You are an expert Enterprise AI Analyst.
 - **CRITICAL:** End with the downloadable link exactly like this:
   "Proposal generated! [Download PDF](THE_URL_FROM_THE_TOOL)"
 
----
-
 ### WORKFLOW 2: PURE RESEARCH
 **Trigger:** User asks a general question.
 **Steps:**
-1.  **SEARCH:** Use `web_search`.
+1.  **SEARCH:** Call `web_search` (Mandatory step).
 2.  **ANSWER:** Synthesize findings and provide the detailed answer
     * *Requirement:* Use Markdown tables where needed.
 
@@ -79,8 +77,8 @@ SYSTEM_PROMPT = """You are an expert Enterprise AI Analyst.
 - Provide the full answer.
 - **MANDATORY:** End with a "Sources" section using MARKDOWN LINKS:
   "### Sources
-   - [Source Title 1](http://url-1.com)
-   - [Source Title 2](http://url-2.com)"
+   - [Title 1](http://url-1.com)
+   - [Title 2](http://url-2.com)"
 """
 
 def get_llm() -> BaseChatModel:
