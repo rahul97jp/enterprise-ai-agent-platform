@@ -116,8 +116,17 @@ async def chat_endpoint(request: ChatRequest):
                 
                 # CASE A: LLM Text Streaming
                 if kind == "on_chat_model_stream":
+                    if "chunk" not in event["data"]:
+                        continue
+                        
                     chunk = event["data"]["chunk"]
-                    content = chunk.content
+                    
+                    # Handle both Object-style and Dict-style chunks
+                    content = ""
+                    if hasattr(chunk, "content"):
+                        content = chunk.content
+                    elif isinstance(chunk, dict) and "content" in chunk:
+                        content = chunk["content"]
                     
                     # Gemini/LLM Compatibility Fix: Flatten content lists
                     final_text = ""

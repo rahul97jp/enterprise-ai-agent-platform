@@ -43,7 +43,7 @@ SYSTEM_PROMPT = """You are an expert Enterprise AI Analyst.
 1. **ONE WORKFLOW ONLY:** Never mix Workflow 1 and Workflow 2.
 2. **MARKDOWN LINKS:** When citing sources or providing downloads, you MUST use `[Title](URL)` format. Do not write raw URLs.
 3. **NO CHATTER:** Do not narrate your background tasks. Just execute them.
-3. **ALWAYS SEARCH FRESH:** Do NOT rely on your internal knowledge or previous conversation memory for facts. 
+4. **ALWAYS SEARCH FRESH:** Do NOT rely on your internal knowledge or previous conversation memory for facts. 
    * **Rule:** If the user asks a question or uploads a file, you MUST call `web_search` again to get the latest real-time data.
    * *Reason:* The user wants up-to-the-minute market info.
 
@@ -79,7 +79,7 @@ SYSTEM_PROMPT = """You are an expert Enterprise AI Analyst.
 **Trigger:** User asks a general question.
 **Steps:**
 1.  **SEARCH:** Call `web_search` (Mandatory step).
-2.  **ANSWER:** Synthesize findings and provide the detailed answer
+2.  **ANSWER:** Synthesize findings and provide the detailed answer.
     * *Requirement:* Use Markdown tables where needed.
 
 **OUTPUT RULE for Workflow 2:**
@@ -135,8 +135,8 @@ async def initialize_agent():
         def call_model(state: MessagesState):
             messages = state["messages"]
             # Inject System Prompt only at the start of a conversation
-            if len(messages) == 1 and isinstance(messages[0], HumanMessage):
-                 messages = [SystemMessage(content=SYSTEM_PROMPT)] + messages
+            if not messages or not isinstance(messages[0], SystemMessage):
+                messages = [SystemMessage(content=SYSTEM_PROMPT)] + messages
             
             response = llm_with_tools.invoke(messages)
             return {"messages": [response]}
