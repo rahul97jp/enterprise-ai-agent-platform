@@ -6,6 +6,7 @@ Defines the LangGraph agent architecture, prompt engineering, and tool integrati
 
 import os
 import asyncio
+import logging
 from dotenv import load_dotenv
 
 from langchain_google_genai import ChatGoogleGenerativeAI
@@ -18,6 +19,14 @@ from langgraph.checkpoint.memory import MemorySaver
 from langchain_core.language_models import BaseChatModel
 
 load_dotenv()
+
+# --- LOGGING CONFIGURATION ---
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S"
+)
+logger = logging.getLogger(__name__)
 
 # CONFIGURATION
 CURRENT_MODEL = "gemini"  # Options: "gemini", "ollama"
@@ -107,7 +116,7 @@ async def initialize_agent():
     if _GRAPH_CACHE is not None:
         return _GRAPH_CACHE
         
-    print(f"...Initializing Enterprise Agent with {CURRENT_MODEL.upper()}...")
+    logger.info(f"Initializing Enterprise Agent with {CURRENT_MODEL.upper()}...")
 
     # Connect to local MCP Server (SSE Transport)
     client = MultiServerMCPClient({
@@ -144,11 +153,11 @@ async def initialize_agent():
 
         # Compile with Global Memory Persistence
         _GRAPH_CACHE = builder.compile(checkpointer=_MEMORY_CACHE)
-        print("...Agent Graph Compiled Successfully.")
+        logger.info("Agent Graph Compiled Successfully.")
         return _GRAPH_CACHE
 
     except Exception as e:
-        print(f"...Critical Error during Agent Initialization: {e}")
+        logger.critical(f"Critical Error during Agent Initialization: {e}")
         raise e
 
 

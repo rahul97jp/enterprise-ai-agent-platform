@@ -8,6 +8,7 @@ It handles file uploads, chat streaming (with tool events), and file downloads.
 import os
 import shutil
 import json
+import logging
 from contextlib import asynccontextmanager
 from typing import AsyncGenerator
 
@@ -27,6 +28,14 @@ MCP_DATA_DIR = os.path.join(BASE_DIR, "mcp-server", "data")
 # Ensure storage directory exists
 os.makedirs(MCP_DATA_DIR, exist_ok=True)
 
+# --- LOGGING CONFIGURATION ---
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S"
+)
+logger = logging.getLogger(__name__)
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -34,10 +43,10 @@ async def lifespan(app: FastAPI):
     Lifespan context manager for the FastAPI app.
     Initializes the AI agent graph on startup to cache resources.
     """
-    print("...System Startup: Initializing AI Agents...")
+    logger.info("System Startup: Initializing AI Agents...")
     await initialize_agent()
     yield
-    print("...System Shutdown...")
+    logger.info("System Shutdown.")
 
 
 app = FastAPI(title="Enterprise AI Assistant API", lifespan=lifespan)
@@ -72,12 +81,14 @@ async def upload_file(file: UploadFile = File(...)):
         with open(file_location, "wb") as buffer:
             shutil.copyfileobj(file.file, buffer)
             
+        logger.info(f"File uploaded successfully: {file.filename}")
         return {
             "filename": file.filename, 
             "status": "uploaded", 
             "path": file_location
         }
     except Exception as e:
+        logger.error(f"File upload failed: {str(e)}")
         raise HTTPException(status_code=500, detail=f"File upload failed: {str(e)}")
 
 
@@ -136,7 +147,7 @@ async def chat_endpoint(request: ChatRequest):
                         }) + "\n"
 
         except Exception as e:
-            print(f"Stream Error: {e}")
+            logger.error(f"Stream Error: {e}")
             yield json.dumps({"type": "error", "content": str(e)}) + "\n"
 
     return StreamingResponse(event_generator(), media_type="application/x-ndjson")
@@ -149,13 +160,16 @@ async def download_file(filename: str):
     Includes security check to prevent directory traversal.
     """
     if ".." in filename or "/" in filename:
+        logger.warning(f"Invalid file access attempt: {filename}")
         raise HTTPException(status_code=400, detail="Invalid filename")
     
     file_path = os.path.join(MCP_DATA_DIR, filename)
     
     if not os.path.exists(file_path):
+        logger.warning(f"Download requested for non-existent file: {filename}")
         raise HTTPException(status_code=404, detail="File not found")
         
+    logger.info(f"Serving file download: {filename}")
     return FileResponse(file_path, media_type="application/pdf", filename=filename)
 
 
