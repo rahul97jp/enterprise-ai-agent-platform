@@ -184,7 +184,7 @@ export default function ChatInterface() {
                     {msg.tools.map((tool, idx) => (
                       <div key={idx} className="flex items-center gap-2 text-xs font-semibold text-slate-600 bg-white border border-slate-200 px-3 py-1.5 rounded-full w-fit shadow-sm">
                         {isProcessing ? <Loader2 className="w-3 h-3 animate-spin text-blue-500" /> : <Check className="w-3 h-3 text-emerald-600" />}
-                        {/* REVERTED: Now shows full string "Accessed Tool: read_file" */}
+                        {/* Shows "Accessed Tool: read_file" */}
                         <span className="uppercase tracking-wider text-[10px]">{tool}</span>
                       </div>
                     ))}
@@ -207,7 +207,7 @@ export default function ChatInterface() {
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Input Area (Reduced Padding from p-6 to p-4) */}
+      {/* Input Area */}
       <form onSubmit={handleSubmit} className="p-4 bg-white border-t border-gray-100 flex gap-4 items-center shrink-0">
         <input 
           type="file" 

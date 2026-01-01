@@ -28,7 +28,7 @@ MCP_DATA_DIR = os.path.join(BASE_DIR, "mcp-server", "data")
 # Ensure storage directory exists
 os.makedirs(MCP_DATA_DIR, exist_ok=True)
 
-# --- LOGGING CONFIGURATION ---
+# LOGGING CONFIGURATION
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s",
@@ -100,13 +100,13 @@ async def chat_endpoint(request: ChatRequest):
     """
     async def event_generator() -> AsyncGenerator[str, None]:
         try:
-            # 1. Retrieve the cached agent graph
+            # Retrieve the cached agent graph
             graph = await get_agent_graph()
             
-            # 2. Configure session memory
+            # Configure session memory
             config = {"configurable": {"thread_id": request.session_id}}
             
-            # 3. Stream events (v2 API for granular control)
+            # Stream events
             async for event in graph.astream_events(
                 {"messages": [HumanMessage(content=request.message)]}, 
                 config=config,

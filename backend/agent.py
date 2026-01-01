@@ -20,7 +20,7 @@ from langchain_core.language_models import BaseChatModel
 
 load_dotenv()
 
-# --- LOGGING CONFIGURATION ---
+# LOGGING CONFIGURATION
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s",

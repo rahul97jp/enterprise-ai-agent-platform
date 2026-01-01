@@ -2,7 +2,6 @@
 MCP Server Module
 -----------------
 Exposes tools for file operations, web research, and PDF generation via the Model Context Protocol.
-Includes robust logging, error handling, and formatting fixes for PDF output.
 """
 
 import os
